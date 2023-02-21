@@ -16,53 +16,61 @@ function getComputerChoice(){
 
 // the user makes the second choice
 //      accept his input as a string.toLowerCase()
-//
 
-const playerSelection = "paper";
-const computerSelection = getComputerChoice();
-
+const playerSelection = "";
+const computerSelection = "";
+let manScore = 0;
+let machineScore = 0;
 function playRound(playerSelection, computerSelection) {
+    playerSelection=prompt().toLowerCase();
+    computerSelection = getComputerChoice();
+    console.log("Man: "+playerSelection + " Machine: " + computerSelection);
     if (playerSelection === "rock") {
-        if (computerSelection === "scissors") {
-            console.log(playerSelection + " " + computerSelection)
-            return "The man wins";
+        if (computerSelection === "scissors") {           
+            manScore++;
+            return "man wins!";
         }
-        if (computerSelection === "paper") {
-            console.log(playerSelection + " " + computerSelection)
-            return "The machine wins";
-        } else {
-            console.log(playerSelection + " " + computerSelection)
-            return "It's a draw";
+        if (computerSelection === "paper") {           
+            machineScore++;
+            return "machine wins!";
+        } else {           
+            return "draw";
         }
     } else if (playerSelection === "paper") {
         if (computerSelection === "scissors") {
-            console.log(playerSelection + " " + computerSelection)
-            return "The machine wins";
+            machineScore++;
+            return "machine wins!";
         }
-        if (computerSelection === "paper") {
-            console.log(playerSelection + " " + computerSelection)
-            return "It's a draw";
-        } else {
-            console.log(playerSelection + " " + computerSelection)
-            return "The man wins";
+        if (computerSelection === "paper") {           
+            return "draw";
+        } else {           
+            manScore++;
+            return "man wins!";
         }
     } else if (playerSelection === "scissors") {
-        if (computerSelection === "scissors") {
-            console.log(playerSelection + " " + computerSelection)
-            return "It's a draw";
+        if (computerSelection === "scissors") {           
+            return "draw";
         }
         if (computerSelection === "paper") {
-            console.log(playerSelection + " " + computerSelection)
-            return "The machine wins";
-        } else {
-            console.log(playerSelection + " " + computerSelection)
-            return "The man wins";
+            manScore++;    
+            return "man wins!";
+        } else {            
+            machineScore++;
+            return "machine wins!";
         }
     }
   }
-console.log(playRound(playerSelection, computerSelection));
-
-
-// rock > scissors
-// scissors > paper
-// paper > rock
+function game() { 
+    return playRound(playerSelection, computerSelection);             
+}
+for (let i = 0; i < 5; i++) {
+    console.log(game());
+    console.log("Round "+Number(i+1)+". Total score: Man has "+manScore+" points; Machine has "+machineScore+" points");   
+    if (i===4&&manScore>machineScore){
+        alert("Game over. The man wins!");       
+    } if (i===4&&manScore<machineScore){
+        alert("Game over. The machine wins!");       
+    } if (i===4&&manScore===machineScore){
+        alert("It's a draw :(");        
+    }
+ }
