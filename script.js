@@ -15,62 +15,134 @@ function getComputerChoice(){
 }
 
 // the user makes the second choice
-//      accept his input as a string.toLowerCase()
 
-const playerSelection = "";
 const computerSelection = "";
+const buttonRock = document.querySelector('#rock');
+
 let manScore = 0;
 let machineScore = 0;
+let numberOfRounds = 1;
 function playRound(playerSelection, computerSelection) {
-    playerSelection=prompt().toLowerCase();
+    
+    if (numberOfRounds===5){
+        
+        if (manScore>machineScore){
+            winner.textContent="Man is the winner!";
+        } else if (manScore<machineScore){
+            winner.textContent="The machine won!";
+        } else if(manScore==machineScore) {
+            winner.textContent="Okay, it's a draw";
+        }       
+    }
+    round.textContent = "Round: "+numberOfRounds;
     computerSelection = getComputerChoice();
-    console.log("Man: "+playerSelection + " Machine: " + computerSelection);
+    
     if (playerSelection === "rock") {
+        numberOfRounds++;
         if (computerSelection === "scissors") {           
             manScore++;
-            return "man wins!";
+            
+            compChoice.textContent = "Machine selected scissors";
+            score.textContent = manScore + " : " + machineScore;
+            content.textContent = 'man wins!';
         }
         if (computerSelection === "paper") {           
             machineScore++;
-            return "machine wins!";
-        } else {           
-            return "draw";
+            
+            compChoice.textContent = "Machine selected paper";
+            score.textContent = manScore + " : " + machineScore;
+            content.textContent = 'machine wins!';
+    
+        } else {  
+            compChoice.textContent = "Machine selected rock";
+            score.textContent = manScore + " : " + machineScore;
+            
+            content.textContent = 'draw';         
         }
     } else if (playerSelection === "paper") {
+        numberOfRounds++;
         if (computerSelection === "scissors") {
             machineScore++;
-            return "machine wins!";
+            compChoice.textContent = "Machine selected scissors";
+            score.textContent = manScore + " : " + machineScore;
+            content.textContent = 'machine wins!';
+            
         }
-        if (computerSelection === "paper") {           
-            return "draw";
+        if (computerSelection === "paper") { 
+            compChoice.textContent = "Machine selected paper";
+            score.textContent = manScore + " : " + machineScore;   
+            content.textContent = 'draw!';     
+            
         } else {           
             manScore++;
-            return "man wins!";
+            compChoice.textContent = "Machine selected rock";
+            score.textContent = manScore + " : " + machineScore;
+            content.textContent = 'man wins!';
+            
         }
     } else if (playerSelection === "scissors") {
-        if (computerSelection === "scissors") {           
-            return "draw";
+        numberOfRounds++;
+        if (computerSelection === "scissors") { 
+            compChoice.textContent = "Machine selected scissors";
+            score.textContent = manScore + " : " + machineScore;
+            content.textContent = 'draw!';          
+            
         }
         if (computerSelection === "paper") {
-            manScore++;    
-            return "man wins!";
+            manScore++;   
+            compChoice.textContent = "Machine selected paper";
+            score.textContent = manScore + " : " + machineScore;
+            content.textContent = 'man wins!'; 
+            
         } else {            
             machineScore++;
-            return "machine wins!";
+            compChoice.textContent = "Machine selected rock";
+            score.textContent = manScore + " : " + machineScore;
+            content.textContent = 'machine wins!';
+           
         }
-    }
+    }    
   }
-function game() { 
-    return playRound(playerSelection, computerSelection);             
+function game() {    
+    return playRound();             
 }
-for (let i = 0; i < 5; i++) {
-    console.log(game());
-    console.log("Round "+Number(i+1)+". Total score: Man has "+manScore+" points; Machine has "+machineScore+" points");   
-    if (i===4&&manScore>machineScore){
-        alert("Game over. The man wins!");       
-    } if (i===4&&manScore<machineScore){
-        alert("Game over. The machine wins!");       
-    } if (i===4&&manScore===machineScore){
-        alert("It's a draw :(");        
-    }
- }
+
+ const rock = document.querySelector('#rock');
+ const paper = document.querySelector('#paper');
+ const scissors = document.querySelector('#scissors');
+
+ rock.addEventListener('click', () => {
+    const playerSelection = 'rock';
+    choice.textContent = 'Player selected rock';
+
+    playRound(playerSelection, computerSelection);
+           
+});
+paper.addEventListener('click', () => {
+    const playerSelection = 'paper';
+    choice.textContent = 'Player selected paper';
+    playRound(playerSelection, computerSelection);    
+});
+scissors.addEventListener('click', () => {
+    const playerSelection = 'scissors';
+    choice.textContent = 'Player selected scissors';
+    playRound(playerSelection, computerSelection);    
+});
+
+const container = document.querySelector('#container');
+
+const content = document.createElement('div');
+const choice = document.createElement('p');
+const compChoice = document.createElement('p');
+const score = document.createElement('p');
+const round = document.createElement('p');
+const winner = document.createElement('div');
+content.classList.add('content');
+choice.classList.add('choice');
+
+container.appendChild(round);
+container.appendChild(choice);
+container.appendChild(compChoice);
+container.appendChild(content);
+container.appendChild(score);
+container.appendChild(winner);
