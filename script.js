@@ -17,7 +17,6 @@ function getComputerChoice(){
 // the user makes the second choice
 
 const computerSelection = "";
-const buttonRock = document.querySelector('#rock');
 
 let manScore = 0;
 let machineScore = 0;
@@ -53,7 +52,7 @@ function playRound(playerSelection, computerSelection) {
             score.textContent = manScore + " : " + machineScore;
             content.textContent = 'machine wins!';
     
-        } else {  
+        } if(computerSelection==="rock") {  
             compChoice.textContent = "Machine selected rock";
             score.textContent = manScore + " : " + machineScore;
             
@@ -73,7 +72,7 @@ function playRound(playerSelection, computerSelection) {
             score.textContent = manScore + " : " + machineScore;   
             content.textContent = 'draw!';     
             
-        } else {           
+        } if (computerSelection === "rock") {           
             manScore++;
             compChoice.textContent = "Machine selected rock";
             score.textContent = manScore + " : " + machineScore;
@@ -94,7 +93,7 @@ function playRound(playerSelection, computerSelection) {
             score.textContent = manScore + " : " + machineScore;
             content.textContent = 'man wins!'; 
             
-        } else {            
+        } if (computerSelection === "rock") {            
             machineScore++;
             compChoice.textContent = "Machine selected rock";
             score.textContent = manScore + " : " + machineScore;
